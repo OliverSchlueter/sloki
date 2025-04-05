@@ -76,7 +76,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "count(rate({service=\"$service\", level=\"DEBUG\"} [$__auto]))",
+          "expr": "count(rate({service=~\"$service\", level=\"DEBUG\"} [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -139,7 +139,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "count(rate({service=\"$service\", level=\"INFO\"} [$__auto]))",
+          "expr": "count(rate({service=~\"$service\", level=\"INFO\"} [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -202,7 +202,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "count(rate({service=\"$service\", level=\"WARN\"} [$__auto]))",
+          "expr": "count(rate({service=~\"$service\", level=\"WARN\"} [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -265,7 +265,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "count(rate({service=\"$service\", level=\"ERROR\"} [$__auto]))",
+          "expr": "count(rate({service=~\"$service\", level=\"ERROR\"} [$__auto]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -365,7 +365,7 @@
           },
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "count by(level) (rate({service=\"$service\"} [$__auto]))",
+          "expr": "count by(level) (rate({service=~\"$service\"} [$__auto]))",
           "hide": false,
           "legendFormat": "{{level}}",
           "queryType": "range",
@@ -483,7 +483,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "count by(level) (rate({service=\"$service\", level=~\"$level\"} [$__auto]))",
+          "expr": "count by(level) (rate({service=~\"$service\", level=~\"$level\"} [$__auto]))",
           "legendFormat": "{{level}}",
           "queryType": "range",
           "refId": "A",
@@ -529,7 +529,7 @@
           },
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "{service=\"$service\", level=~\"$level\"}",
+          "expr": "{service=~\"$service\", level=~\"$level\"}",
           "queryType": "range",
           "refId": "A"
         }
@@ -545,19 +545,30 @@
     "list": [
       {
         "current": {
-          "text": "backend",
-          "value": "backend"
+          "text": [
+            "backend"
+          ],
+          "value": [
+            "backend"
+          ]
         },
         "description": "",
+        "includeAll": true,
+        "multi": true,
         "name": "service",
         "options": [
           {
             "selected": true,
             "text": "backend",
             "value": "backend"
+          },
+          {
+            "selected": false,
+            "text": "ai-worker",
+            "value": "ai-worker"
           }
         ],
-        "query": "backend",
+        "query": "backend,ai-worker",
         "type": "custom"
       },
       {
@@ -608,5 +619,5 @@
   "timezone": "browser",
   "title": "Logs",
   "uid": "cei0l8zp0h0cgd",
-  "version": 18
+  "version": 19
 }
