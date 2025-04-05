@@ -23,6 +23,7 @@ import (
 func main() {
 	logger := sloki.NewService(sloki.Configuration{
 		URL:          "http://localhost:3100/loki/api/v1/push",
+		Service:      "my-service",
 		ConsoleLevel: slog.LevelDebug,
 		LokiLevel:    slog.LevelInfo,
 	})

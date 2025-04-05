@@ -13,6 +13,7 @@ import (
 
 type Service struct {
 	url          string
+	service      string
 	consoleLevel slog.Level
 	lokiLevel    slog.Level
 	httpClient   *http.Client
@@ -20,6 +21,7 @@ type Service struct {
 
 type Configuration struct {
 	URL          string
+	Service      string
 	ConsoleLevel slog.Level
 	LokiLevel    slog.Level
 }
@@ -27,6 +29,7 @@ type Configuration struct {
 func NewService(cfg Configuration) *Service {
 	return &Service{
 		url:          cfg.URL,
+		service:      cfg.Service,
 		consoleLevel: cfg.ConsoleLevel,
 		lokiLevel:    cfg.LokiLevel,
 		httpClient:   &http.Client{},
@@ -92,7 +95,7 @@ func (s *Service) WithGroup(_ string) slog.Handler {
 
 func (s *Service) pushLogToLoki(timestamp, level, message string, attrs map[string]string) error {
 	labels := map[string]string{
-		"service": "backend",
+		"service": s.service,
 		"level":   level,
 	}
 	for k, v := range attrs {
