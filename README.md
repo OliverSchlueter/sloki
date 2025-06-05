@@ -1,5 +1,8 @@
 # Sloki
 
+This project is now integrated into github.com/oliverschlueter/goutils
+
+
 A slog handler (for GoLang) which sends logs to Loki.
 
 You can find a docker-compose file to run Loki and Grafana in the [loki_docker](loki_docker) directory. There is also an example dashboard for Grafana.
